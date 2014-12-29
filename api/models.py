@@ -24,7 +24,7 @@ class Photo(models.Model):
     #originalFileName = models.CharField(max_length=50)
     content = models.ImageField(upload_to='./photos')
     def __unicode__(self):
-        return self.content.fileName
+        return self.content.filename
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
