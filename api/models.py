@@ -26,11 +26,17 @@ class Photo(models.Model):
     def __unicode__(self):
         return self.originalFileName
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.name
+
 class Product(models.Model):
     name = models.CharField(max_length=50) 
     code = models.CharField(max_length=50)
     description = models.CharField(max_length=2000)
-    size = models.ManyToManyField(Size, verbose_name="list of sizes")
+    categories = models.ManyToManyField(Category, verbose_name="list of categories")
+    sizes = models.ManyToManyField(Size, verbose_name="list of sizes")
     photos = models.ManyToManyField(Photo, verbose_name="list of photos")
     def __unicode__(self):
         return self.name
