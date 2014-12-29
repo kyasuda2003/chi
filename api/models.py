@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 from django.contrib.auth.models import User
+import os
 
 #for user in User.objects.all():
 #    Token.objects.get_or_create(user=user)
@@ -21,7 +22,6 @@ class Size(models.Model):
         return self.name
 
 class Photo(models.Model):
-    import os
     #originalFileName = models.CharField(max_length=50)
     content = models.ImageField(upload_to='./photos')
     def __unicode__(self):
