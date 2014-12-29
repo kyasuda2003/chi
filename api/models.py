@@ -21,10 +21,11 @@ class Size(models.Model):
         return self.name
 
 class Photo(models.Model):
+    import os
     #originalFileName = models.CharField(max_length=50)
     content = models.ImageField(upload_to='./photos')
     def __unicode__(self):
-        return self.content.filename
+        return os.path.basename(self.content.name)
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
