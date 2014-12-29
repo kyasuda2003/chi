@@ -1,0 +1,13 @@
+#main { width:978px; margin:0 auto; text-align:left;}
+#page1 {min-width:1015px;}
+#header {height:160px; position:relative;}
+
+#footer { height:106px;}
+
+.col-1, .col-2, .col-3 {float:left;}
+.container {width:100%; overflow:hidden;}
+.container1 {width:100%;}
+
+.col-1 {width:281px;}
+.col-2 {width:605px;}
+.col-3 {width:312px;}
