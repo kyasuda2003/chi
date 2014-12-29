@@ -19,6 +19,6 @@ class ProductAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Size, SizeAdmin)
-admin.site.register(Category, SizeAdmin)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Product, ProductAdmin)

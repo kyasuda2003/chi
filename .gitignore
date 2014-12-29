@@ -2,3 +2,4 @@
 /api/migrations/
 .DS_Store
 *.pyc
+*.*~
