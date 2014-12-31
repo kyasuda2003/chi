@@ -16,6 +16,11 @@ import os
 #    if created:
 #        Token.objects.create(user=instance)
 
+class Account(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    def __unicode__(self):
+        return self.user.username
+
 class Size(models.Model):
     name = models.CharField(max_length=50)
     def __unicode__(self):

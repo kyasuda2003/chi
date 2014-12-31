@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from poe.api.serializers import UserSerializer, GroupSerializer
-
+from poe.api.serializers import UserSerializer, GroupSerializer, CategorySerializer
+from poe.api.models import Account, Size, Photo, Category, Product
 import datetime
 from django.utils.timezone import utc
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -16,13 +16,19 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-
 class GroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 class ObtainExpiringAuthToken(ObtainAuthToken):
     def post(self, request):

@@ -9,6 +9,7 @@ admin.autodiscover()
 router = routers.DefaultRouter()
 router.register(r'users', views_.UserViewSet)
 router.register(r'groups', views_.GroupViewSet)
+router.register(r'categories',views_.CategoryViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

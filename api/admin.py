@@ -1,6 +1,9 @@
 from django.contrib import admin
 
-from poe.api.models import Size, Category, Photo, Product
+from poe.api.models import Size, Category, Photo, Product, Account
+
+class AccountAdmin(admin.ModelAdmin):
+    pass
 
 #@admin.register(Size)
 class SizeAdmin(admin.ModelAdmin):
@@ -18,6 +21,7 @@ class PhotoAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     pass
 
+admin.site.register(Account, AccountAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Photo, PhotoAdmin)
