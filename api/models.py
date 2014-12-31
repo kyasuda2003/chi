@@ -27,8 +27,9 @@ class Size(models.Model):
         return self.name
 
 class Photo(models.Model):
-    #originalFileName = models.CharField(max_length=50)
     content = models.ImageField(upload_to='./photos')
+    def filename(self):
+        return self.content.name
     def __unicode__(self):
         return os.path.basename(self.content.name)
 
