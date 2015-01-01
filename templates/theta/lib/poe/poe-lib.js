@@ -1,58 +1,107 @@
-var Animal, Horse, Snake, sam, tom, _ref, _ref1,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+(function() {
+  var app;
 
-Animal = (function() {
-  function Animal(name) {
-    this.name = name;
-  }
-
-  Animal.prototype.move = function(meters) {
-    return alert(this.name + (" moved " + meters + "m."));
+  String.prototype.format = function() {
+    var args;
+    args = Array.prototype.slice.call(arguments, 0);
+    return this.toString().replace(/{(\d+)}/g, function(match, number) {
+      if (typeof args[number] !== "undefined") {
+        return args[number];
+      } else {
+        return match;
+      }
+    });
   };
 
-  return Animal;
-
-})();
-
-Snake = (function(_super) {
-  __extends(Snake, _super);
-
-  function Snake() {
-    _ref = Snake.__super__.constructor.apply(this, arguments);
-    return _ref;
-  }
-
-  Snake.prototype.move = function() {
-    alert("Slithering...");
-    return Snake.__super__.move.call(this, 5);
+  app = {
+    util: {
+      array2json: function(arr, jsn, key) {
+        var obj;
+        for (obj in arr) {
+          jsn[arr[obj][key].toString()] = arr[obj];
+        }
+      }
+    },
+    ui: {
+      popupBlock: function(blockId, colour, opac, display) {
+        $("#" + blockId).each(function(index, val) {
+          $(this).remove();
+        });
+        return $("<div id='" + blockId + "' class='block-window'></div>").css({
+          height: "100%",
+          width: "100%",
+          "z-index": "4000",
+          opacity: opac,
+          position: "fixed",
+          top: "0",
+          left: "0",
+          display: (display ? "block" : "none"),
+          "background-color": colour,
+          "background-image": (colour === "white" ? "url('" + app.settings.apppath + "img/temp-load.gif')" : ""),
+          "background-repeat": "no-repeat",
+          "background-position": "center"
+        });
+      },
+      switchView: function(win, path) {
+        if (win.location.href.indexOf(path) > -1) {
+          return;
+        }
+        $("body").append(app.ui.popupBlock("login-block", "white", "1", false));
+        $("#login-block").fadeIn(1000, function() {
+          win.location.replace(win.location.pathname + path);
+        });
+      }
+    },
+    api: (function() {
+      var _this;
+      _this = this;
+      return {
+        getAllSizes: function() {
+          if ($.isEmptyObject(app.data.sizes)) {
+            return $.Deferred().resolve();
+          } else {
+            return $.get("{0}{1}obj/sizes/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
+              app.util.array2json(data.results, app.data.sizes, "id");
+            });
+          }
+        },
+        getAllCategories: function() {
+          if ($.isEmptyObject(app.data.categories)) {
+            return $.Deferred().resolve();
+          } else {
+            return $.get("{0}{1}obj/categories/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
+              app.util.array2json(data.results, app.data.categories, "id");
+            });
+          }
+        },
+        getAllPhotos: function() {
+          if ($.isEmptyObject(app.data.photos)) {
+            return $.Deferred().resolve();
+          } else {
+            return $.get("{0}{1}obj/photos/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
+              app.util.array2json(data.results, app.data.photos, "id");
+            });
+          }
+        },
+        getAllProducts: function() {
+          if ($.isEmptyObject(app.data.products)) {
+            return $.Deferred().resolve();
+          } else {
+            return $.get("{0}{1}obj/products/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
+              app.util.array2json(data.results, app.data.products, "id");
+            });
+          }
+        }
+      };
+    })(),
+    data: {
+      sizes: {},
+      categories: {},
+      photos: {},
+      products: {}
+    }
   };
 
-  return Snake;
+  window.app = app;
 
-})(Animal);
-
-Horse = (function(_super) {
-  __extends(Horse, _super);
-
-  function Horse() {
-    _ref1 = Horse.__super__.constructor.apply(this, arguments);
-    return _ref1;
-  }
-
-  Horse.prototype.move = function() {
-    alert("Galloping...");
-    return Horse.__super__.move.call(this, 45);
-  };
-
-  return Horse;
-
-})(Animal);
-
-sam = new Snake("Sammy the Python");
-
-tom = new Horse("Tommy the Palomino");
-
-sam.move();
-
-tom.move();
+}).call(this);
