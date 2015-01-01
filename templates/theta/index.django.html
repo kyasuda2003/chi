@@ -3,8 +3,8 @@
 <html ng-app="poeApp">
     <head>
         <title>Pacific Oasis Enterprise, Inc. Dev.</title>
-        <link href=<script type="text/javascript" src="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
-        <link href=<script type="text/javascript" src="{% static 'css/layout.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/layout.css' %}" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="{% static 'js/app.conf.js' %}"></script>
         <script type="text/javascript" src="{% static 'lib/angular/angular.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
@@ -17,7 +17,7 @@
         <script type="text/javascript" src="{% static 'lib/news_gothic_700.font.js' %}"></script>
         <script type="text/javascript" src="{% static 'lib/swiss_721_italic_500.font.js' %}"></script>
         <script type="text/javascript" src="{% static 'lib/swiss_721_400.font.js' %}"></script>
-        <script type="text/javascript" src="{% static 'lib/jquery.anythingslider.js' %"></script>
+        <script type="text/javascript" src="{% static 'lib/jquery.anythingslider.js' %}"></script>
         <script type="text/javascript" src="{% static 'lib/jquery.easing.1.2.js' %}"></script>
         <script type="text/javascript" src="{% static 'lib/jquery.slideshow.js' %}"></script>
         <!--[if lt IE 7]-->
@@ -36,7 +36,7 @@
                             <!--header -->
                             <div id="header">
                                 <a href="/">
-                                    <img src=<script type="text/javascript" src="{% static 'img/logo.jpg' %}" alt="" class="logo" />
+                                    <img src="{% static 'img/logo.jpg' %}" alt="" class="logo" />
                                 </a>
                                 <div class="container">
                                     <div class="social">
@@ -45,9 +45,9 @@
                                 </div>
                                 <div class="menu">
                                     <ul>
-                                        <li class="active"><a href="#/main">Home</a>
+                                        <li class="active"><a href="javascript:void(0);" onclick="app.ui.switchView(window,'#/main');">Home</a>
                                         </li>
-                                        <li><a href="#/product">Items</a>
+                                        <li><a href="javascript:void(0);" onclick="app.ui.switchView(window,'#/product');">Items</a>
                                         </li>
                                         <li><a href="#/people">People</a>
                                         </li>
@@ -63,27 +63,27 @@
                                     <div class="playPauseExample slideShow">
                                         <ul class="slides">
                                             <li class="slide">
-                                                <img src=<script type="text/javascript" src="{% static 'img/img1.jpg' %}" alt="" width="978" height="526" />
+                                                <img src="{% static 'img/img1.jpg' %}" alt="" width="978" height="526" />
                                                 <div class="slogan">
-                                                    <img src=<script type="text/javascript" src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
+                                                    <img src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
                                                 </div>
                                             </li>
                                             <li class="slide">
-                                                <img src=<script type="text/javascript" src="{% static 'img/img2.jpg' %}" alt="" width="978" height="526" />
+                                                <img src="{% static 'img/img2.jpg' %}" alt="" width="978" height="526" />
                                                 <div class="slogan">
-                                                    <img src=<script type="text/javascript" src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
+                                                    <img src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
                                                 </div>
                                             </li>
                                             <li class="slide">
-                                                <img src=<script type="text/javascript" src="{% static 'img/img3.jpg' %}" alt="" width="978" height="526" />
+                                                <img src="{% static 'img/img3.jpg' %}" alt="" width="978" height="526" />
                                                 <div class="slogan">
-                                                    <img src=<script type="text/javascript" src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
+                                                    <img src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
                                                 </div>
                                             </li>
                                             <li class="slide">
-                                                <img src=<script type="text/javascript" src="{% static 'img/img4.jpg' %}" alt="" width="978" height="526" />
+                                                <img src="{% static 'img/img4.jpg' %}" alt="" width="978" height="526" />
                                                 <div class="slogan">
-                                                    <img src=<script type="text/javascript" src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
+                                                    <img src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
                                                 </div>
                                             </li>
                                         </ul>
@@ -133,19 +133,19 @@
                                         <ul>
                                             <li>
                                                 <a href="#">
-                                                    <img src=<script type="text/javascript" src="{% static 'img/banner1.jpg' %}" alt="" />
+                                                    <img src="{% static 'img/banner1.jpg' %}" alt="" />
                                                 </a>
                                                 <a href="#">
-                                                    <img src=<script type="text/javascript" src="{% static 'img/banner2.jpg' %}" alt="" />
+                                                    <img src="{% static 'img/banner2.jpg' %}" alt="" />
                                                 </a>
                                                 <a href="#">
-                                                    <img src=<script type="text/javascript" src="{% static 'img/banner3.jpg' %}" alt="" />
+                                                    <img src="{% static 'img/banner3.jpg' %}" alt="" />
                                                 </a>
                                                 <a href="#">
-                                                    <img src=<script type="text/javascript" src="{% static 'img/banner4.jpg' %}" alt="" />
+                                                    <img src="{% static 'img/banner4.jpg' %}" alt="" />
                                                 </a>
                                                 <a href="#">
-                                                    <img src=<script type="text/javascript" src="{% static 'img/banner5.jpg' %}" alt="" />
+                                                    <img src="{% static 'img/banner5.jpg' %}" alt="" />
                                                 </a>
                                             </li>
                                         </ul>
@@ -168,7 +168,7 @@
                                                             this.value = 'Enter your e-mail here:'" onfocus="if (this.value == 'Enter your e-mail here:')
                                                                         this.value = ''" />
                                                 </label>
-                                                <input type="image" src=<script type="text/javascript" src="{% static 'img/input-img.jpg' %}" />
+                                                <input type="image" src="{% static 'img/input-img.jpg' %}" />
                                                 <br />
                                                 <a href="#">Unsubscribe</a>
                                             </div>
