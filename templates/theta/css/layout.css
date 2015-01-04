@@ -1,5 +1,5 @@
 #main { width:978px; margin:0 auto; text-align:left;}
-#page1 {min-width:1015px;}
+#page1 {min-width:1015px;background-color: rgba(244,244,244,0.1);}
 #header {height:160px; position:relative;}
 
 #footer { height:106px;}
@@ -9,5 +9,5 @@
 .container1 {width:100%;}
 
 .col-1 {width:281px;}
-.col-2 {width:605px;}
+.col-2 {width:605px;height: 944px;}
 .col-3 {width:312px;}
