@@ -1,12 +1,12 @@
 /* CSS Document */
 
-* {
-	margin:0; padding:0;
+* { padding:0;
 	font-size:100%;
-}
+	text-align: left;
+ margin: 0;}
 
 body{
-	background:url(../img/body-tail.gif) repeat;
+	/* background:url(../img/body-tail.gif) repeat; */
 	text-align:center;
 	min-width:1000px;
 }

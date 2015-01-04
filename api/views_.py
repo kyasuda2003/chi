@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from poe.api.serializers import UserSerializer, GroupSerializer, CategorySerializer, AccountSerializer, SizeSerializer, PhotoSerializer, ProductSerializer
-from poe.api.models import Account, Size, Photo, Category, Product
+from poe.api.serializers import UserSerializer, GroupSerializer, CategorySerializer, AccountSerializer, PhotoSerializer, ProductSerializer
+from poe.api.models import Account, Photo, Category, Product
 import datetime
 from django.utils.timezone import utc
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -24,10 +24,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class AccountViewSet(viewsets.ModelViewSet):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
-
-class SizeViewSet(viewsets.ModelViewSet):
-    queryset = Size.objects.all()
-    serializer_class = SizeSerializer
 
 class PhotoViewSet(viewsets.ModelViewSet):
     queryset = Photo.objects.all()
@@ -64,11 +60,18 @@ def index(request):
     #return render(request, 'polls/index.html', context)
     return render(request, 'theta/index.django.html')
 
-def show_picture(request, filename):
+def show_picture(request, filename, isthumb):
     from django.conf import settings
     from django.http import HttpResponse
     from django.core.servers.basehttp import FileWrapper
     from django.core.exceptions import PermissionDenied
+    from sorl.thumbnail.images import ImageFile
+    
+    from sorl.thumbnail import get_thumbnail
+    from sorl.thumbnail import delete
+
+    from django.shortcuts import get_object_or_404
+
     import os
     import mimetypes
 
@@ -88,8 +91,18 @@ def show_picture(request, filename):
         raise PermissionDenied
 
     filename = filename.replace('/','').replace('\\','');
-    filepath = os.path.join(settings.MEDIA_ROOT+r'/photos/', filename)    
-    wrapper = FileWrapper(open(filepath, 'rb'))
+    filepath = os.path.join(settings.MEDIA_ROOT+settings.UPLOAD_DIR, filename)
+    
     conttype = mimetypes.guess_type(filepath)[0]
+    print settings.UPLOAD_DIR
+    _im = get_object_or_404(Photo, content=settings.UPLOAD_DIR+filename)
+    im = _im.content
+
+    if isthumb=='1':
+        im = get_thumbnail(_im.content, '110x110', crop='center', quality=99)
+        response = HttpResponse(im.read(), content_type=conttype)
+        return response
+
+    wrapper = FileWrapper(im.file)
     response = HttpResponse(wrapper, content_type=conttype)
     return response

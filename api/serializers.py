@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User, Group
-from poe.api.models import Account, Size, Photo, Category, Product
+from poe.api.models import Account, Photo, Category, Product
 from rest_framework import serializers
-
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -19,11 +18,6 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('name','id',)
 
-class SizeSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Size
-        fields = ('name','id',)
-
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
@@ -37,6 +31,6 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('name','id','code','description','sizes','photos','categories',)
+        fields = ('id','code','description','case_pack','case_length','case_width','case_height','cu_ft','wt_lbs','wt_dim_ups','nmfc','_class','pallet_tie','pallet_high','case_pallet','one_plt_wt','categories','photos',)
 
 

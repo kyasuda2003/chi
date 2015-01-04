@@ -1,5 +1,4 @@
 (function() {
-  (function() {
     String.prototype.format = function() {
       var args;
       args = Array.prototype.slice.call(arguments, 0);
@@ -11,12 +10,42 @@
         }
       });
     };
+                
     app.util = {
-      array2json: function(arr, jsn, key) {
-        var obj;
-        for (obj in arr) {
+      array2json: function(arr, key) {
+        var jsn={};
+        for (var obj in arr) {
           jsn[arr[obj][key].toString()] = arr[obj];
         }
+        return jsn;
+      },
+      json2array:function(jsn){
+          return $.map(jsn,function(value, index){
+            return [value];
+          });
+      },
+      getRenderedArr: function(arr, size) {
+        //var _ref=$.map(app.data.products,function(value, index){return [value];});
+        var newArr = [];
+        for (var i=0; i<arr.length; i+=size) {
+          newArr.push(arr.slice(i, i+size));
+        }
+        return newArr;
+      },
+      getProducts1RowTable:function(numInARow){
+          var _ref={};
+          for (var cat in app.data.categories){
+              _ref[cat]=app.data.categories[cat];
+              var _ref1=$.map(app.data.products,function(value, index){
+                if (value.categories.indexOf(_ref[cat].id)>-1)
+                    return [value];
+                });
+
+                _ref[cat].prodArray=app.util.getRenderedArr(_ref1,numInARow);
+                  
+          }
+        
+        return _ref;
       }
     };
     app.ui = {
@@ -45,7 +74,9 @@
         }
         $("body").append(app.ui.popupBlock("login-block", "white", "1", false));
         $("#login-block").fadeIn(1000, function() {
-          win.location.replace(win.location.pathname + path);
+          $.when(app.api.getAllCategories(),app.api.getAllPhotos(),app.api.getAllProducts()).done(function(){
+            win.location.replace(win.location.pathname + path);
+          });
         });
       }
     };
@@ -53,21 +84,12 @@
       var _this;
       _this = this;
       return {
-        getAllSizes: function() {
-          if (!$.isEmptyObject(app.data.sizes)) {
-            return $.Deferred().resolve();
-          } else {
-            return $.get("{0}{1}obj/sizes/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
-              app.util.array2json(data.results, app.data.sizes, "id");
-            });
-          }
-        },
         getAllCategories: function() {
           if (!$.isEmptyObject(app.data.categories)) {
             return $.Deferred().resolve();
           } else {
-            return $.get("{0}{1}obj/categories/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
-              app.util.array2json(data.results, app.data.categories, "id");
+            return $.get("{0}{1}/categories/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
+               app.data.categories=app.util.array2json(data.results, "id");
             });
           }
         },
@@ -75,8 +97,8 @@
           if (!$.isEmptyObject(app.data.photos)) {
             return $.Deferred().resolve();
           } else {
-            return $.get("{0}{1}obj/photos/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
-              app.util.array2json(data.results, app.data.photos, "id");
+            return $.get("{0}{1}/photos/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
+              app.data.photos= app.util.array2json(data.results, "id");
             });
           }
         },
@@ -84,19 +106,17 @@
           if (!$.isEmptyObject(app.data.products)) {
             return $.Deferred().resolve();
           } else {
-            return $.get("{0}{1}obj/products/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
-              app.util.array2json(data.results, app.data.products, "id");
+            return $.get("{0}{1}/products/".format(app.settings.apihost, app.settings.apipath)).success(function(data, textStatus, jqxhr) {
+              app.data.products=app.util.array2json(data.results, "id");
             });
           }
         }
       };
+      
     })();
     app.data = {
-      sizes: {},
       categories: {},
       photos: {},
       products: {}
     };
-  }).call(this);
-
 }).call(this);

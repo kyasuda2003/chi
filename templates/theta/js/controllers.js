@@ -73,8 +73,7 @@ angular.module('poeApp.controllers', [])
             $(this).find('strong').animate({left: '50'}, 100, 'easeInCirc').animate({left: '-20'}, 10, 'easeInCirc').animate({left: '0'}, 400, 'easeOutBounce');
         }, function () {
         });
-        $('#login-block').fadeOut(1000, function () {
-        });
+        $('#login-block').fadeOut(1000, function () {});
 
     });
     /*
@@ -97,16 +96,17 @@ angular.module('poeApp.controllers', [])
         $('.menu > ul > li:eq(0)').attr('class', '');
         $('.menu > ul > li:eq(1)').attr('class', 'active');
 
-        $.when(app.api.getAllSizes(), app.api.getAllCategories(),
-                app.api.getAllPhotos(), app.api.getAllProducts()).done(function (vals) {
-            $('#login-block').fadeOut(1000, function () {
-
-            });
-        });
+        $('#login-block').fadeOut(1000, function (){});
     });
-    sc.getResource = function (path) {
-        return app.settings.apppath + path;
+    
+    sc.getPhoto = function (pIds,isthumb) {
+        var _ref=app.data.photos[pIds[0].toString()].filename;
+        
+        return app.settings.apihost+app.settings.mediapath + '/' +_ref +(isthumb?'/1':'');
     };
+    
+    sc.productData=app.util.getProducts1RowTable(3);
+    
     /*
      sc.permissions={
      showMainContent:__settings.isMain

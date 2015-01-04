@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from django.conf import settings
 
 from django.contrib.auth.models import User
 import os
@@ -21,13 +22,8 @@ class Account(models.Model):
     def __unicode__(self):
         return self.user.username
 
-class Size(models.Model):
-    name = models.CharField(max_length=50)
-    def __unicode__(self):
-        return self.name
-
 class Photo(models.Model):
-    content = models.ImageField(upload_to='./photos')
+    content = models.ImageField(upload_to=settings.UPLOAD_DIR)
     def filename(self):
         return self.content.name
     def __unicode__(self):
@@ -39,11 +35,22 @@ class Category(models.Model):
         return self.name
 
 class Product(models.Model):
-    name = models.CharField(max_length=50) 
     code = models.CharField(max_length=50)
-    description = models.CharField(max_length=2000)
+    description = models.TextField(max_length=500)
+    case_pack = models.CharField(max_length=20)
+    case_length = models.CharField(max_length=20)
+    case_width = models.CharField(max_length=20)
+    case_height = models.CharField(max_length=20)
+    cu_ft = models.FloatField()
+    wt_lbs = models.FloatField()
+    wt_dim_ups = models.FloatField()
+    nmfc = models.IntegerField()
+    _class = models.CharField(max_length=50)
+    pallet_tie = models.IntegerField()
+    pallet_high = models.IntegerField()
+    case_pallet = models.IntegerField()
+    one_plt_wt = models.FloatField() 
     categories = models.ManyToManyField(Category, verbose_name="list of categories")
-    sizes = models.ManyToManyField(Size, verbose_name="list of sizes")
     photos = models.ManyToManyField(Photo, verbose_name="list of photos")
     def __unicode__(self):
-        return self.name
+        return self.code
