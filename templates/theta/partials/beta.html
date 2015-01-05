@@ -48,7 +48,7 @@
                     <table width="100%" border="0" cellspacing="2" cellpadding="0">
                         <tr ng-repeat="rows in catVal.prodArray">
                             <td>
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="poe-prod-table">
                                     <tr>
                                         <td align="center" ng-repeat="prod in rows">
                                             <a href="javascript:void(0)" ng-click="{{getPhoto(prod.photos,false)}}" rel="lightbox" title="D-011 - Janitor's Cart">
@@ -59,11 +59,14 @@
                                     <tr>
                                         <td valign="top" class="blacktext" ng-repeat="prod in rows">
                                             <p>
-                                                <span class="bluetext"> Item#:</span> {{prod.code}}
+                                                <span class="bluetext"> {{prod.description}}</span>
                                                 <br/>
-                                                <span class="bluetext">  Size:{{prod.case_height}}x{{prod.case_length}}</span> 
+                                                Item#: <span class="bluetext">{{prod.code}}</span>
                                                 <br/>
-                                                <span class="bluetext">  Description:{{prod.description}}</span> </p>
+                                                Size: <span class="bluetext">{{prod.case_height}}x{{prod.case_length}}</span> 
+                                                <br/>
+                                                Case/Pack: <span class="bluetext">{{prod.case_pack}}</span> 
+                                                </p>
                                         </td>
                                     </tr>
                                 </table>
