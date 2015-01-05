@@ -51,7 +51,7 @@
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="poe-prod-table">
                                     <tr>
                                         <td align="center" ng-repeat="prod in rows">
-                                            <a href="javascript:void(0)" ng-click="{{getPhoto(prod.photos,false)}}" rel="lightbox" title="D-011 - Janitor's Cart">
+                                            <a ng-click="browsePhoto(prod.photos)" rel="lightbox" title="{{prod.description}}">
                                                 <img ng-src="{{getPhoto(prod.photos,true)}}" alt="" class="imgbordeimg" />
                                             </a>
                                         </td>
@@ -59,7 +59,7 @@
                                     <tr>
                                         <td valign="top" class="blacktext" ng-repeat="prod in rows">
                                             <p>
-                                                <span class="bluetext"> {{prod.description}}</span>
+                                                <span class="bluetext">{{prod.description}}</span>
                                                 <br/>
                                                 Item#: <span class="bluetext">{{prod.code}}</span>
                                                 <br/>

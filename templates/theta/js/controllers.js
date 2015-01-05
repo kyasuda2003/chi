@@ -84,7 +84,7 @@ angular.module('poeApp.controllers', [])
      */
 
 }])
-.controller('beta', ['$scope', function (sc) {
+.controller('beta', ['$scope','$window', function (sc,wi) {
     var __settings = app.settings;
 
     sc.$on('$routeChangeSuccess', function () {
@@ -107,6 +107,27 @@ angular.module('poeApp.controllers', [])
     
     sc.productData=app.util.getProducts1RowTable(3);
     
+    sc.browsePhoto=function(pIds){
+        
+        $('body').append($('<div />').attr({
+            'class':'poe-photo-block'
+        }).css({
+            'position': 'fixed',
+            'z-index': 4001,
+            'width': '100%',
+            'height': '100%',
+            'background-color': 'rgba(0,0,0,0.5)',
+            'top': '0px',
+            'left': '0px',
+            'text-align':'center',
+            'padding-top':'20px'
+        }).append($('<img />').attr({
+            'src':sc.getPhoto(pIds,false),
+            'class':'poe-photo-show'
+        })).on({'click':function(){
+            this.remove();
+        }}));
+    };
     /*
      sc.permissions={
      showMainContent:__settings.isMain
