@@ -71,25 +71,28 @@ def show_picture(request, filename, isthumb):
     from sorl.thumbnail import delete
 
     from django.shortcuts import get_object_or_404
+    from poe.api.authentication import ExpiringTokenAuthentication
 
     import os
     import mimetypes
 
-    _ref2 = None
+    #_ref2 = None
 
     try:
         _ref = request.META['HTTP_AUTHORIZATION']
     except:
         print 'Request.META contains none HTTP_AUTHORIZATION'
-    else:
-        _ref1 = _ref[_ref.find(' ')+1:]
-        _ref2 = Token.objects.filter(key=_ref1)
-        print _ref2
+        #ExpiringTokenAuthentication.authenticate(request)
+    #else:
+    #    _ref1 = _ref[_ref.find(' ')+1:]
+    #    _ref2 = Token.objects.filter(key=_ref1)
+    #    print _ref2
 
-    
-    if not _ref2 and not request.user.is_authenticated():
-        raise PermissionDenied
+    #print 'Checking permission.'
+    #if not request.user.is_authenticated():
+    #    raise PermissionDenied
 
+    #print 'Permission granted.'
     filename = filename.replace('/','').replace('\\','');
     filepath = os.path.join(settings.MEDIA_ROOT+settings.UPLOAD_DIR, filename)
     
