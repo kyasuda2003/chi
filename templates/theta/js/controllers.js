@@ -73,7 +73,7 @@ angular.module('poeApp.controllers', [])
             $(this).find('strong').animate({left: '50'}, 100, 'easeInCirc').animate({left: '-20'}, 10, 'easeInCirc').animate({left: '0'}, 400, 'easeOutBounce');
         }, function () {
         });
-        $('#login-block').fadeOut(1000, function () {});
+        $('#login-block').fadeOut(500, function () {});
 
     });
     /*
@@ -89,14 +89,11 @@ angular.module('poeApp.controllers', [])
 
     sc.$on('$routeChangeSuccess', function () {
         __settings.stage = 'product';
-        $('#header').css('height', '');
-        $('#header .show').hide();
-        $('#header .container:eq(1)').hide();
+            $('#header').css('height', '');
+            $('#header .show').hide();
+            $('#header .container:eq(1)').hide();
 
-        $('.menu > ul > li:eq(0)').attr('class', '');
-        $('.menu > ul > li:eq(1)').attr('class', 'active');
-
-        $('#login-block').fadeOut(1000, function (){});
+        $('#login-block').fadeOut(500, function (){});
     });
     
     sc.getPhoto = function (pIds,isthumb) {
@@ -133,4 +130,14 @@ angular.module('poeApp.controllers', [])
      showMainContent:__settings.isMain
      }
      */
+}])
+.controller('gamma', ['$scope','$window', function (sc,wi) {
+     sc.$on('$routeChangeSuccess', function () {
+         app.settings.stage = 'contact';
+        $('#header').css('height', '');
+            $('#header .show').hide();
+            $('#header .container:eq(1)').hide();
+
+        $('#login-block').fadeOut(500, function (){});
+    });
 }]);

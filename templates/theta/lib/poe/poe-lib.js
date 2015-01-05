@@ -68,12 +68,17 @@
           "background-position": "center"
         });
       },
-      switchView: function(win, path) {
+      switchView: function(obj, win, path) {
+        $('.menu ul li').removeClass('active');
+        $(obj).parent().attr({class:'active'});
+        
         if (win.location.href.indexOf(path) > -1) {
           return;
         }
+        
         $("body").append(app.ui.popupBlock("login-block", "white", "1", false));
-        $("#login-block").fadeIn(1000, function() {
+        $("#login-block").fadeIn(500, function() {
+            
           $.when(app.api.getAllCategories(),app.api.getAllPhotos(),app.api.getAllProducts()).done(function(){
             win.location.replace(win.location.pathname + path);
           });
